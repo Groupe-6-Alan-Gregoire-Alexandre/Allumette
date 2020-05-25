@@ -9,7 +9,7 @@ void Socket::Connect(){
 
     socket = new QTcpSocket (this);
 
-    socket->connectToHost("voidrealms.com",80);
+    socket->connectToHost("127.0.0.1",4242);
 
     if(socket->waitForConnected(3000)){
         qDebug() << "connected";
