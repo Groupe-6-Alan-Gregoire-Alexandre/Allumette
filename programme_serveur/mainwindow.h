@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QWidget>
+#include <QtNetwork>
 #include <QTcpServer>
 #include <QTcpSocket>
 
@@ -16,14 +18,17 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void envoyerDonnees(const QString &message);
 public slots:
     void onNewConnection();
     void onSocketStateChanged(QAbstractSocket::SocketState socketState);
     void onReadyRead();
+    void donneesRecues();
 
 private:
     Ui::MainWindow *ui;QTcpServer  _server;
-    QList<QTcpSocket*>  _sockets;
+    QList<QTcpSocket*>  clients;
+    quint16 tailleMessage;
 
 };
 #endif // MAINWINDOW_H
