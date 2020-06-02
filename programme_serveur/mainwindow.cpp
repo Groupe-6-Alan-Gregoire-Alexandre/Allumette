@@ -79,10 +79,9 @@ void MainWindow::donneesRecues()
        in >> message;
 
 
-       // 2 : on renvoie le message à tous les clients
-       envoyerDonnees(message);
 
-       // 3 : remise de la taille du message à 0 pour permettre la réception des futurs messages
+
+       //  remise de la taille du message à 0 pour permettre la réception des futurs messages
        tailleMessage = 0;
 }
 void MainWindow::envoyerDonnees(const QString &message)
