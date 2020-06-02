@@ -6,21 +6,20 @@ using namespace std;
 
 
 
- /*enum joueur{
+ enum joueur{
     J1,
     J2
  };
-
  enum type_code_partie
  {
      joueur_1_gagnant,
      joueur_2_gagnant,
- };*/
+ };
 
 
  int nb_allumette;
- QString J1;
- QString J2;
+
+
 
 void afficher_allumette(){
 
@@ -39,7 +38,7 @@ void afficher_allumette(){
 
      }while(nb_allumette < 7);
 
-    cout << "Vous avez choisis " << nb_allumette << " allumettes" << endl ;
+    cout << "Vous avez choisis " << nb_allumette << " allumettes\n" << endl ;
 
 
 }
@@ -50,8 +49,17 @@ void jouer_un_coup(){
 
  do{
 
-      cout << "Combien d'allumettes voulez-vous enlevez (1 / 2 / 3) : " << endl ;
+       for(int i = nb_allumette  ; i > 0 ; i--)
+        {
+
+            cout << " ! "  ;
+
+
+        }
+      cout << "\n\nCombien d'allumettes voulez-vous enlevez (1 / 2 / 3) : " << endl ;
       cin >> choix ;
+
+
 
       if (choix == 1){
            nb_allumette = nb_allumette - 1 ;
@@ -63,11 +71,20 @@ void jouer_un_coup(){
       else
           cout << "Veuillez choisir un autre nombre " << endl ;
 
-      cout << "Il reste " << nb_allumette << " allumettes." << endl ;
+
+
+      cout << "Il reste " << nb_allumette << " allumettes.\n" << endl ;
 
     }while(nb_allumette !=0 );
 
+
     cout << "C'est gagne !!!" << endl ;
+
+}
+
+
+void tour_par_tour()
+{
 
 }
 
@@ -76,11 +93,13 @@ void jeu(){
     afficher_allumette();
     jouer_un_coup();
 
+
 }
 
 int main(int argc, char *argv[])
 {
     jeu();
+
 
     QCoreApplication a(argc, argv);
 
