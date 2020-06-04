@@ -19,8 +19,6 @@ using namespace std;
 
  int nb_allumette;
 
-
-
 void afficher_allumette(){
 
     cout << "Bienvenue dans le jeu des allumettes" << endl;
@@ -92,8 +90,6 @@ void jeu(){
 
     afficher_allumette();
     jouer_un_coup();
-
-
 }
 
 int main(int argc, char *argv[])
