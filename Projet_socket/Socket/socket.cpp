@@ -1,5 +1,6 @@
 #include "socket.h"
 
+
 Socket::Socket(QObject *parent) : QObject(parent)
 {
 
@@ -28,11 +29,32 @@ void Socket::Connect(){
         qDebug() << "not connect";
     }
 
+}
+void Socket::donneesRecues()
+{
+    /* Même principe que lorsque le serveur reçoit un paquet :
+    On essaie de récupérer la taille du message
+    Une fois qu'on l'a, on attend d'avoir reçu le message entier (en se basant sur la taille annoncée tailleMessage)
+    */
+    QDataStream in(socket);
+
+    if (tailleMessage == 0)
+    {
+        if (socket->bytesAvailable() < (int)sizeof(quint16))
+             return;
+
+        in >> tailleMessage;
+    }
+
+    if (socket->bytesAvailable() < tailleMessage)
+        return;
 
 
+    // Si on arrive jusqu'à cette ligne, on peut récupérer le message entier
+    QString messageRecu;
+    in >> messageRecu;
 
 
-
-
-
+    // On remet la taille du message à 0 pour pouvoir recevoir de futurs messages
+    tailleMessage = 0;
 }

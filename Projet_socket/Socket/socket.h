@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QDebug>
+#include <QDataStream>
+
 
 
 class Socket : public QObject
@@ -13,11 +15,14 @@ public:
     explicit Socket(QObject *parent = nullptr);
 
     void Connect ();
+private slots:
+    void donneesRecues();
 
 signals:
 
 private:
     QTcpSocket *socket;
+    quint16 tailleMessage;
 
 };
 
