@@ -13,11 +13,6 @@ enum joueur{
     J2
 };
 
-struct plateau
-{
-    joueur nb_allumette;
-};
-
 enum type_code_partie
 {
     non_finie,
@@ -27,10 +22,9 @@ enum type_code_partie
 
 //TODO  RETIRER LES VARIABLES GLOBALES : nb_alumette
 
-int nb_allumette;
 
 // Affiche les allumettes
-void afficher_allumette(){
+void afficher_allumette(int nb_allumette){
     for(int i = nb_allumette  ; i > 0 ; i--)
     {
         cout << " ! "  ;
@@ -39,23 +33,23 @@ void afficher_allumette(){
     cout << endl;
 }
 
-void choisirNombreAllumettesInitial()
+void choisirNombreAllumettesInitial(int * nb_allumette)
 {
     do {
         cout << "Choisissez le nombre d'allumettes (doit etre superieur a 7) : " << endl;
-        cin >> nb_allumette;
+        cin >> * nb_allumette;
 
-        if(nb_allumette < 7){
+        if( * nb_allumette < 7){
             cout << "Le nombre d'allumette est insufisant" << endl ;
         }
 
-    }while(nb_allumette < 7);
+    }while( * nb_allumette < 7);
 
-    cout << "Vous avez choisis " << nb_allumette << " allumettes\n" << endl ;
+    cout << "Vous avez choisis " << * nb_allumette << " allumettes\n" << endl ;
 }
 
 // Méthode faisant jouer UN SEUL coup
-void jouer_un_coup(){
+void jouer_un_coup(int nb_allumette){
 
     int choix ;
 
@@ -116,9 +110,10 @@ void jeu(){
 
     // déclaration des variables
     int joueur = 1;
+    int nb_allumette;
 
-    choisirNombreAllumettesInitial();
-    afficher_allumette();
+    choisirNombreAllumettesInitial( & nb_allumette);
+    afficher_allumette(nb_allumette);
 
     // jeu
     do
@@ -127,10 +122,10 @@ void jeu(){
         cout << "### C'est au tour du joueur " << joueur << " ### " << endl;
 
         // on fait jouer un coup
-        jouer_un_coup();
+        jouer_un_coup(nb_allumette);
 
         // on affiche le plateaucf
-        afficher_allumette(  );
+        afficher_allumette( nb_allumette );
 
         // changement de joueur
         joueur = 3 - joueur;
