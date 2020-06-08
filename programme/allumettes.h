@@ -1,6 +1,9 @@
 #ifndef ALLUMETTES_H
 #define ALLUMETTES_H
 
+#endif // ALLUMETTES_H
+
+
 #include <iostream>
 #include <string>
 
@@ -21,21 +24,3 @@ public :
 
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif // ALLUMETTES_H

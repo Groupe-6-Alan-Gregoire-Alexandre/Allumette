@@ -1,3 +1,5 @@
+
+
 #include <QCoreApplication>
 #include "allumettes.h"
 using namespace std;
@@ -10,8 +12,15 @@ enum joueur{
     J1,
     J2
 };
+
+struct plateau
+{
+    joueur nb_allumette;
+};
+
 enum type_code_partie
 {
+    non_finie,
     joueur_1_gagnant,
     joueur_2_gagnant,
 };
@@ -50,26 +59,55 @@ void jouer_un_coup(){
 
     int choix ;
 
+
     do{
         cout << "\n\nCombien d'allumettes voulez-vous enlevez (1 / 2 / 3) : " << endl ;
         cin >> choix ;
 
-        // TODO il ne faut pas pouvoir retirer plus d'allumettes que ce qui est disponible
-        if (choix == 1){
+
+    switch(choix)
+    {
+case 1 :
+        if(nb_allumette >= 1)
             nb_allumette = nb_allumette - 1 ;
-        }
-        else if (choix == 2)
-            nb_allumette = nb_allumette - 2 ;
-        else if (choix == 3)
+        else
+            cout << "Vous ne pouvez pas enlever plus d'allumettes qu'il en reste." << endl;
+    cout << "Il reste " << nb_allumette << " allumettes.\n" << endl ;
+    break;
+
+case 2 :
+    if(nb_allumette >= 2)
+        nb_allumette = nb_allumette - 2 ;
+    else
+        cout << "Vous ne pouvez pas enlever plus d'allumettes qu'il en reste." << endl;
+
+
+
+    cout << "Il reste " << nb_allumette << " allumettes.\n" << endl ;
+    break;
+
+case 3 :
+        if(nb_allumette >= 3)
             nb_allumette = nb_allumette - 3 ;
         else
-            cout << "Veuillez choisir un autre nombre " << endl ;
+            cout << "Vous ne pouvez pas enlever plus d'allumettes qu'il en reste." << endl;
+    cout << "Il reste " << nb_allumette << " allumettes.\n" << endl ;
 
-        cout << "Il reste " << nb_allumette << " allumettes.\n" << endl ;
 
-    }while( choix < 1 || choix > 3 );
+    if(nb_allumette <= 0)
+
+   break;
+
+   default:
+
+        cout << "Veuillez choisir un autre nombre " << endl ;
+        break;
+
+        }
+
+
+    }while(choix < 1 || choix > 3);
 }
-
 
 
 void jeu(){
@@ -85,13 +123,13 @@ void jeu(){
     // jeu
     do
     {
-        std::cout << "---------------------" << std::endl;
-        std::cout << "C est au tour du joueur " << joueur << std::endl;
+        cout << "" << endl;
+        cout << "### C'est au tour du joueur " << joueur << " ### " << endl;
 
         // on fait jouer un coup
         jouer_un_coup();
 
-        // on affiche le plateau
+        // on affiche le plateaucf
         afficher_allumette(  );
 
         // changement de joueur
@@ -99,7 +137,7 @@ void jeu(){
     } while ( nb_allumette !=0 );
 
     // TODO afficher qui a gagné
-    cout << "C'est gagne !!!" << endl ;
+    cout << "Le joueur " << joueur << " a gagne la partie !" << endl ;
 }
 
 int main(int argc, char *argv[])
@@ -111,3 +149,4 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
