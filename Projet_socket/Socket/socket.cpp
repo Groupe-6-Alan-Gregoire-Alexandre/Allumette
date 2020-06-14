@@ -58,3 +58,23 @@ void Socket::donneesRecues()
     // On remet la taille du message à 0 pour pouvoir recevoir de futurs messages
     tailleMessage = 0;
 }
+void Socket::envoyerDonnees(const QString &message)
+{
+    // Préparation du paquet
+    QByteArray paquet;
+    QDataStream out(&paquet, QIODevice::WriteOnly);
+
+    out << (quint16) 0; // On écrit 0 au début du paquet pour réserver la place pour écrire la taille
+    out << message; // On ajoute le message à la suite
+    out.device()->seek(0); // On se replace au début du paquet
+    out << (quint16) (paquet.size() - sizeof(quint16)); // On écrase le 0 qu'on avait réservé par la longueur du message
+
+
+    // Envoi du paquet préparé à tous les clients connectés au serveur
+    for (int i = 0; i < socket->size(); i++)
+    {
+        socket->write(paquet);
+    }
+
+}
+
