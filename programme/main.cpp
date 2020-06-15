@@ -2,6 +2,9 @@
 
 #include <QCoreApplication>
 #include "allumettes.h"
+#include "serveur.h"
+#include "client.h"
+
 using namespace std;
 #include <iostream>
 
@@ -49,7 +52,7 @@ void choisirNombreAllumettesInitial(int * nb_allumette)
 }
 
 // Méthode faisant jouer UN SEUL coup
-void jouer_un_coup(int nb_allumette){
+void jouer_un_coup(int * nb_allumette){
 
     int choix ;
 
@@ -59,43 +62,42 @@ void jouer_un_coup(int nb_allumette){
         cin >> choix ;
 
 
-    switch(choix)
-    {
-case 1 :
-        if(nb_allumette >= 1)
-            nb_allumette = nb_allumette - 1 ;
-        else
-            cout << "Vous ne pouvez pas enlever plus d'allumettes qu'il en reste." << endl;
-    cout << "Il reste " << nb_allumette << " allumettes.\n" << endl ;
-    break;
+        switch(choix)
+        {
+            case 1 :
+                if(*nb_allumette >= 1)
+                    *nb_allumette = *nb_allumette - 1 ;
+                else
+                    cout << "Vous ne pouvez pas enlever plus d'allumettes qu'il en reste." << endl;
+                cout << "Il reste " << *nb_allumette << " allumettes.\n" << endl ;
+                break;
 
-case 2 :
-    if(nb_allumette >= 2)
-        nb_allumette = nb_allumette - 2 ;
-    else
-        cout << "Vous ne pouvez pas enlever plus d'allumettes qu'il en reste." << endl;
-
-
-
-    cout << "Il reste " << nb_allumette << " allumettes.\n" << endl ;
-    break;
-
-case 3 :
-        if(nb_allumette >= 3)
-            nb_allumette = nb_allumette - 3 ;
-        else
-            cout << "Vous ne pouvez pas enlever plus d'allumettes qu'il en reste." << endl;
-    cout << "Il reste " << nb_allumette << " allumettes.\n" << endl ;
+            case 2 :
+                if(*nb_allumette >= 2)
+                    *nb_allumette = *nb_allumette - 2 ;
+                else
+                    cout << "Vous ne pouvez pas enlever plus d'allumettes qu'il en reste." << endl;
 
 
-    if(nb_allumette <= 0)
 
-   break;
+                cout << "Il reste " << *nb_allumette << " allumettes.\n" << endl ;
+                break;
 
-   default:
+            case 3 :
+                if(*nb_allumette >= 3)
+                    *nb_allumette = *nb_allumette - 3 ;
+                else
+                    cout << "Vous ne pouvez pas enlever plus d'allumettes qu'il en reste." << endl;
+                cout << "Il reste " << *nb_allumette << " allumettes.\n" << endl ;
 
-        cout << "Veuillez choisir un autre nombre " << endl ;
-        break;
+
+                if(*nb_allumette <= 0)
+                    break;
+
+            default:
+
+                cout << "Veuillez choisir un autre nombre " << endl ;
+                break;
 
         }
 
@@ -103,8 +105,8 @@ case 3 :
     }while(choix < 1 || choix > 3);
 }
 
-
-void jeu(){
+// numero = 1 si serveur; 2 sinon
+void jeu( int numero ){
     cout << "Bienvenue dans le jeu des allumettes" << endl;
     cout << "************************************" << endl;
 
@@ -122,7 +124,7 @@ void jeu(){
         cout << "### C'est au tour du joueur " << joueur << " ### " << endl;
 
         // on fait jouer un coup
-        jouer_un_coup(nb_allumette);
+        jouer_un_coup( & nb_allumette );
 
         // on affiche le plateaucf
         afficher_allumette( nb_allumette );
@@ -131,14 +133,29 @@ void jeu(){
         joueur = 3 - joueur;
     } while ( nb_allumette !=0 );
 
-    // TODO afficher qui a gagné
     cout << "Le joueur " << joueur << " a gagne la partie !" << endl ;
 }
 
 int main(int argc, char *argv[])
 {
-    jeu();
+    std::cout << "Taper 1 pour serveur ; taper 2 pour client" << std::endl;
+    int numero;
+    std::cin >> numero;
+    if ( numero == 1 )
+    {
+        std::cout << "avant la déclaration" << endl;
+        Serveur s;
+        std::cout << "après la déclaration" << endl;
+    }
+    else
+    {
+        std::cout << "avant la déclaration" << endl;
+        Client c;
+        c.envoyerMessages("Bonjour");
+        std::cout << "après la déclaration" << endl;
+    }
 
+   // jeu(numero);
 
     QCoreApplication a(argc, argv);
 
