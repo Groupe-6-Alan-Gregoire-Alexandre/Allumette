@@ -15,7 +15,7 @@ public:
     explicit Socket(QObject *parent = nullptr);
 
     void Connect ();
-    void envoyerDonnees(const QString &message);
+    void envoyerMessages(const QString &message);
 
 private slots:
     void donneesRecues();

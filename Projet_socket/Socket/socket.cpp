@@ -58,7 +58,7 @@ void Socket::donneesRecues()
     // On remet la taille du message à 0 pour pouvoir recevoir de futurs messages
     tailleMessage = 0;
 }
-void Socket::envoyerDonnees(const QString &message)
+void Socket::envoyerMessages(const QString &message)
 {
     // Préparation du paquet
     QByteArray paquet;

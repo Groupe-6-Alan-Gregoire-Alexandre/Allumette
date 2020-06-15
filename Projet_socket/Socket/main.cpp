@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 
     Socket cSocket;
     cSocket.Connect();
-    cSocket.envoyerDonnees("Bonjour");
+    cSocket.envoyerMessages("Bonjour");
 
     return a.exec();
 }
