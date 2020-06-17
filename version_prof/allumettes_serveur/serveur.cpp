@@ -240,6 +240,8 @@ void Serveur::fin_de_tour()
     }
     else
     {
+        // a améliorer
+
         std::string s( "Le joueur ");
         s = s + QString::number(m_joueur).toStdString() + " a gagne la partie !";
         afficherPartout(s);

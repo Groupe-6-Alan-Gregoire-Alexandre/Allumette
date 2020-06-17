@@ -48,6 +48,8 @@ void Client::on_connecte()
 void Client::se_connecter()
 {
     std::cout << "Client::se_connecter()" << std::endl;
+    // optionnellement améliorer en donnant la possibilité de choisir l'IP du serveur
+
     m_tcpSocket->connectToHost( QHostAddress("127.0.0.1").toString(),53000 );
 }
 
